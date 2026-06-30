@@ -1,0 +1,111 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Plan {
+  FREE
+  PRO
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+}
+
+enum AppointmentStatus {
+  CONFIRMED
+  CANCELED
+  DONE
+}
+
+model Business {
+  id        Int      @id @default(autoincrement())
+  name      String
+  slug      String   @unique
+  plan      Plan     @default(FREE)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users         User[]
+  services      Service[]
+  appointments  Appointment[]
+  notifications Notification[]
+  settings      BusinessSettings?
+}
+
+model User {
+  id         Int    @id @default(autoincrement())
+  name       String
+  email      String @unique
+  password   String
+  role       Role   @default(ADMIN)
+  businessId Int
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Service {
+  id         Int     @id @default(autoincrement())
+  name       String
+  duration   Int
+  price      Decimal @db.Decimal(10, 2)
+  businessId Int
+
+  business      Business      @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  appointments  Appointment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Appointment {
+  id             Int               @id @default(autoincrement())
+  customerName   String
+  customerPhone  String
+  customerEmail  String?
+  date           DateTime
+  status         AppointmentStatus @default(CONFIRMED)
+  serviceId      Int
+  businessId     Int
+
+  service  Service  @relation(fields: [serviceId], references: [id])
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  businessId Int
+  type      String
+  title     String
+  message   String
+  read      Boolean  @default(false)
+  customerPhone String?
+  customerName  String?
+  scheduledAt DateTime?
+  sentAt    DateTime?
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+}
+
+model BusinessSettings {
+  id         Int      @id @default(autoincrement())
+  businessId Int      @unique
+  workHours  Json
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+}
