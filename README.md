@@ -294,8 +294,15 @@ Interface visual do banco.
 
 ---
 
+## 🧪 Demo
+
+🔗 Live: [https://seu-projeto.vercel.app ](https://agendame-neon.vercel.app/) 
+📦 Repo: https://github.com/MizaelSemM/AgendaMe
+
+---
+
 # 👨‍💻 Autor
 
-Desenvolvido por **Mizael Soluso**
+Desenvolvido por **MizaelSemM**
 
 Se este projeto foi útil para você, deixe uma ⭐ no repositório.
