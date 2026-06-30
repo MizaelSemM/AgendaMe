@@ -1,36 +1,301 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 AgendaMe
 
-## Getting Started
+> Um SaaS completo de agendamento online para empresas como barbearias, clínicas, salões de beleza e prestadores de serviços.
 
-First, run the development server:
+AgendaMe permite que empresas gerenciem seus serviços, horários de funcionamento, equipe e agendamentos em um único painel administrativo, enquanto os clientes realizam reservas através de uma página pública personalizada.
+
+---
+
+## ✨ Demonstração
+
+> **Deploy:** *(adicione aqui o link da Vercel)*
+
+> **Documentação completa:** [`DOCS.md`](./DOCS.md)
+
+---
+
+## 📷 Preview
+
+> Adicione aqui algumas imagens ou GIFs do sistema.
+
+* Landing Page
+* Dashboard
+* Gerenciamento de Serviços
+* Página Pública de Agendamento
+* Área de Configurações
+
+---
+
+# 🎯 Funcionalidades
+
+## Área Pública
+
+* Landing Page responsiva
+* Cadastro de empresas
+* Login de administradores
+* Página pública personalizada para cada empresa
+* Agendamento online
+* Horários disponíveis em tempo real
+* Cancelamento público de agendamentos
+* Confirmação do agendamento
+
+---
+
+## Dashboard Administrativo
+
+### Visão Geral
+
+* Dashboard com estatísticas
+* Sistema de notificações
+* Link público compartilhável
+
+### Serviços
+
+* Criar serviços
+* Editar serviços
+* Excluir serviços
+* Definir duração
+* Definir preço
+
+### Agendamentos
+
+* Listagem completa
+* Concluir atendimento
+* Cancelar atendimento
+* Excluir registros
+
+### Horários de Funcionamento
+
+* Configuração por dia da semana
+* Horário de abertura e fechamento
+* Intervalo de almoço
+* Múltiplos períodos por dia
+
+### Administração
+
+* Cadastro de administradores
+* Gerenciamento de empresas
+* Controle de permissões
+
+---
+
+# 🔐 Autenticação
+
+O sistema possui autenticação completa utilizando:
+
+* JWT
+* Cookies HttpOnly
+* Hash de senhas com bcrypt
+* Middleware de proteção de rotas
+* Controle de permissões baseado em Roles
+
+### Roles
+
+* **SUPER_ADMIN**
+
+  * Gerencia toda a plataforma
+  * Cria administradores
+  * Gerencia empresas
+
+* **ADMIN**
+
+  * Gerencia apenas sua empresa
+  * Serviços
+  * Agendamentos
+  * Configurações
+
+---
+
+# 📲 Integração WhatsApp
+
+O sistema possui integração preparada para APIs como:
+
+* Evolution API
+* Z-API
+
+Quando configurada, a aplicação envia:
+
+* Confirmação do agendamento
+* Lembrete automático antes do horário marcado
+
+---
+
+# 🧪 Testes
+
+O projeto possui testes unitários utilizando **Jest**.
+
+```bash
+npm test
+```
+
+---
+
+# 🛠️ Tecnologias
+
+| Tecnologia      | Utilização           |
+| --------------- | -------------------- |
+| Next.js 16      | Framework Full Stack |
+| React 19        | Interface            |
+| TypeScript      | Tipagem              |
+| Prisma ORM      | Banco de Dados       |
+| PostgreSQL      | Persistência         |
+| Tailwind CSS v4 | Estilização          |
+| Zod             | Validação            |
+| JWT (Jose)      | Autenticação         |
+| bcrypt          | Hash de Senhas       |
+| Jest            | Testes Unitários     |
+
+---
+
+# 🗂️ Arquitetura
+
+```
+src
+│
+├── app
+├── components
+├── lib
+├── generated
+│
+prisma
+│
+proxy.ts
+```
+
+A aplicação segue uma arquitetura organizada em camadas:
+
+* Interface (App Router)
+* API Routes
+* Camada de autenticação
+* Prisma ORM
+* PostgreSQL
+
+---
+
+# ⚙️ Instalação
+
+Clone o projeto
+
+```bash
+git clone https://github.com/seuusuario/agendame.git
+```
+
+Entre na pasta
+
+```bash
+cd agendame
+```
+
+Instale as dependências
+
+```bash
+npm install
+```
+
+Configure as variáveis de ambiente
+
+```env
+DATABASE_URL=
+
+JWT_SECRET=
+
+NEXT_PUBLIC_URL=
+
+WHATSAPP_API_URL=
+
+WHATSAPP_API_KEY=
+
+WHATSAPP_INSTANCE=
+```
+
+Execute as migrations
+
+```bash
+npx prisma migrate dev
+```
+
+Execute o seed
+
+```bash
+npx tsx prisma/seed.ts
+```
+
+Inicie o projeto
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# 📜 Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev
+```
 
-## Learn More
+Servidor de desenvolvimento.
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Build de produção.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm start
+```
 
-## Deploy on Vercel
+Executa a versão de produção.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm test
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Executa os testes.
+
+```bash
+npx prisma studio
+```
+
+Interface visual do banco.
+
+---
+
+# 📌 Principais Recursos Técnicos
+
+* Arquitetura Full Stack com Next.js
+* API REST
+* Autenticação JWT
+* Middleware de autorização
+* CRUD completo
+* Sistema de Roles
+* Slugs únicos
+* Geração automática de horários
+* Validação com Zod
+* Hash seguro de senhas
+* Integração com PostgreSQL
+* Prisma ORM
+* Testes Unitários
+* Código totalmente tipado com TypeScript
+
+---
+
+# 🚀 Próximas Funcionalidades
+
+* Plano PRO
+* Pagamentos
+* Dashboard com gráficos
+* Calendário
+* Upload de imagens
+* Integração Google Calendar
+* Integração Stripe
+* Sistema de Assinaturas
+
+---
+
+# 👨‍💻 Autor
+
+Desenvolvido por **Mizael Soluso**
+
+Se este projeto foi útil para você, deixe uma ⭐ no repositório.
